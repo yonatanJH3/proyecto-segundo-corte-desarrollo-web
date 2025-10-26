@@ -1,0 +1,23 @@
+<div class="main-layout">
+  <aside class="sidebar">
+    <h3 class="logo">Mi App</h3>
+    <nav>
+      <ul>
+        <li><a routerLink="/dashboard" routerLinkActive="active">Inicio</a></li>
+        <li><a routerLink="/dashboard/users" routerLinkActive="active">Usuarios</a></li>
+        <li><a routerLink="/dashboard/reports" routerLinkActive="active">Reportes</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="content-area">
+    <header class="header">
+      <span>Bienvenida, Yonatan 👋</span>
+      <button class="logout-btn">Cerrar sesión</button>
+    </header>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

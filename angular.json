@@ -59,6 +59,20 @@
           },
           "defaultConfiguration": "production"
         },
+        "server": {
+  "builder": "@angular-devkit/build-angular:server",
+  "options": {
+    "outputPath": "dist/academika-temp/server",
+    "main": "src/main.server.ts",
+    "tsConfig": "tsconfig.server.json"
+  },
+  "configurations": {
+    "production": {
+      "outputHashing": "media"
+    }
+  }
+}
+,
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
@@ -92,5 +106,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "838dd8df-2e3f-4430-b7d5-160174157902"
   }
 }
