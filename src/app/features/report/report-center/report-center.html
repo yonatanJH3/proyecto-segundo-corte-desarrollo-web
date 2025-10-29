@@ -1,0 +1,140 @@
+<div class="h-full overflow-y-auto p-6">
+    <!-- Sección Reportes -->
+    <div id="reportes" class="section-content">
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Centro de
+                Reportes</h2>
+            <p class="text-gray-600">Genera reportes detallados y análisis</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Filtros de Reportes -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3
+                    class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-filter text-blue-600 mr-2"></i>
+                    Filtros de Reporte
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="reporte-tipo"
+                            class="block text-sm font-medium text-gray-700 mb-1">Tipo
+                            de Reporte</label>
+                        <select id="reporte-tipo"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="estudiantes">Reporte de
+                                Estudiantes</option>
+                            <option value="grupos">Reporte de Grupos</option>
+                            <option value="notas">Reporte de Notas</option>
+                            <option value="general">Reporte General</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="reporte-periodo"
+                            class="block text-sm font-medium text-gray-700 mb-1">Período</label>
+                        <select id="reporte-periodo"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value>Todos los períodos</option>
+                            <option value="2024-1">2024-1</option>
+                            <option value="2024-2">2024-2</option>
+                            <option value="2025-1">2025-1</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="reporte-grupo"
+                            class="block text-sm font-medium text-gray-700 mb-1">Grupo
+                            Específico</label>
+                        <select id="reporte-grupo"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value>Todos los grupos</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="reporte-estudiante"
+                            class="block text-sm font-medium text-gray-700 mb-1">Estudiante
+                            Específico</label>
+                        <select id="reporte-estudiante"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value>Todos los estudiantes</option>
+                        </select>
+                    </div>
+                    <button id="btn-generar-reporte"
+                        class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 px-6 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all font-medium">
+                        <i class="fas fa-file-pdf mr-2"></i>Generar Reporte PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Vista Previa del Reporte -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3
+                    class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-eye text-purple-600 mr-2"></i>
+                    Vista Previa
+                </h3>
+                <div id="vista-previa-reporte"
+                    class="border border-gray-200 rounded-lg p-4 min-h-96">
+                    <div class="text-center py-12">
+                        <i
+                            class="fas fa-file-alt text-6xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-500">Selecciona los filtros y genera
+                            un
+                            reporte para ver la vista previa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas de Reportes -->
+        <div class="mt-8 grid md:grid-cols-4 gap-6">
+            <div
+                class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Reportes
+                            Generados</p>
+                        <p class="text-2xl font-bold text-blue-600"
+                            id="total-reportes">0</p>
+                    </div>
+                    <i class="fas fa-file-pdf text-blue-600 text-2xl"></i>
+                </div>
+            </div>
+            <div
+                class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 border border-green-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Estudiantes
+                            Reportados</p>
+                        <p class="text-2xl font-bold text-green-600"
+                            id="estudiantes-reportados">0</p>
+                    </div>
+                    <i class="fas fa-users text-green-600 text-2xl"></i>
+                </div>
+            </div>
+            <div
+                class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-6 border border-purple-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Grupos
+                            Incluidos</p>
+                        <p class="text-2xl font-bold text-purple-600"
+                            id="grupos-reportados">0</p>
+                    </div>
+                    <i class="fas fa-layer-group text-purple-600 text-2xl"></i>
+                </div>
+            </div>
+            <div
+                class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg p-6 border border-orange-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Último
+                            Reporte</p>
+                        <p class="text-sm font-bold text-orange-600"
+                            id="ultimo-reporte">Ninguno</p>
+                    </div>
+                    <i class="fas fa-clock text-orange-600 text-2xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

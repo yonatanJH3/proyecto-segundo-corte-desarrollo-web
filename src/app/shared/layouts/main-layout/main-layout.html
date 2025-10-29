@@ -1,23 +1,183 @@
-<div class="main-layout">
-  <aside class="sidebar">
-    <h3 class="logo">Mi App</h3>
-    <nav>
-      <ul>
-        <li><a routerLink="/dashboard" routerLinkActive="active">Inicio</a></li>
-        <li><a routerLink="/dashboard/users" routerLinkActive="active">Usuarios</a></li>
-        <li><a routerLink="/dashboard/reports" routerLinkActive="active">Reportes</a></li>
-      </ul>
-    </nav>
-  </aside>
+<div class="h-full bg-gray-50">
+    <div id="app" class="h-full flex" style="height: 100vh;width: 100%;">
 
-  <div class="content-area">
-    <header class="header">
-      <span>Bienvenida, Yonatan 👋</span>
-      <button class="logout-btn">Cerrar sesión</button>
-    </header>
+        <aside class="w-64 sidebar shadow-2xl">
+            <div class="p-6">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-white">Academika</h1>
+                        <p class="text-xs text-gray-300">v4.0 Pro</p>
+                    </div>
+                </div>
 
-    <main class="main-content">
-      <router-outlet></router-outlet>
-    </main>
-  </div>
+                <!-- Perfil de Usuario -->
+                <div class="glass-effect rounded-lg p-4 mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user-shield text-white"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-800">Admin
+                                Principal</p>
+                            <p class="text-xs text-gray-600">Administrador</p>
+                            <div class="flex items-center mt-1">
+                                <div
+                                    class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                                <span class="text-xs text-green-600">En
+                                    línea</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navegación -->
+                <nav class="space-y-2">
+                    <a
+                        routerLink="/dashboard"
+                        routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+                        <i class="fas fa-chart-pie w-5"></i>
+                        <span>Dashboard</span>
+                        <span
+                            class="ml-auto notification-badge bg-red-500 text-white text-xs px-2 py-1 rounded-full">3</span>
+                    </a>
+
+                    <a
+                        routerLink="/gestion"
+                        routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
+                        class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+                        <i class="fas fa-user-plus w-5"></i>
+                        <span>Registro</span>
+                    </a>
+
+                    <a
+                        routerLink="/groups"
+                        routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
+                        class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+                        <i class="fas fa-users w-5"></i>
+                        <span>Grupos</span>
+                    </a>
+
+                    <a
+                        routerLink="/grading"
+                        routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
+                        class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+                        <i class="fas fa-clipboard-list w-5"></i>
+                        <span>Notas</span>
+                    </a>
+
+                    <a
+                        routerLink="/consultation"
+                        routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
+                        class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+                        <i class="fas fa-search w-5"></i>
+                        <span>Consultas</span>
+                    </a>
+
+                    <a
+                        routerLink="/reports"
+                        routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
+                        class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+                        <i class="fas fa-chart-bar w-5"></i>
+                        <span>Reportes</span>
+                    </a>
+
+                    <a
+                        routerLink="/configuration"
+                        routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
+                        class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+                        <i class="fas fa-cog w-5"></i>
+                        <span>Configuración</span>
+                    </a>
+                </nav>
+
+                <!-- Estadísticas Rápidas -->
+                <div class="mt-8 glass-effect rounded-lg p-4">
+                    <h3 class="text-sm font-semibold text-gray-800 mb-3">Resumen
+                        Rápido</h3>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-gray-600">Estudiantes</span>
+                            <span class="font-semibold text-blue-600"
+                                id="sidebar-estudiantes">0</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="text-gray-600">Docentes</span>
+                            <span class="font-semibold text-green-600"
+                                id="sidebar-docentes">0</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="text-gray-600">Grupos Activos</span>
+                            <span class="font-semibold text-purple-600"
+                                id="sidebar-grupos">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 overflow-hidden">
+            <!-- Header -->
+            <header class="bg-white shadow-sm border-b px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <h2 id="page-title"
+                            class="text-2xl font-bold text-gray-800">Dashboard</h2>
+                        <div
+                            class="hidden md:flex items-center space-x-2 text-sm text-gray-500">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>{{ currentDate | date:
+                                'EEEE, d \'de\' MMMM \'de\' yyyy' }}</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <!-- Buscador Global -->
+                        <div class="relative">
+                            <input type="text" id="global-search"
+                                placeholder="Buscar..."
+                                class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-64">
+                            <i
+                                class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+
+                        <!-- Notificaciones -->
+                        <button
+                            class="relative p-2 text-gray-600 hover:text-purple-600 transition-colors">
+                            <i class="fas fa-bell text-lg"></i>
+                            <span
+                                class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center notification-badge">3</span>
+                        </button>
+
+                        <!-- Modo Oscuro -->
+                        <button id="dark-mode-toggle"
+                            class="p-2 text-gray-600 hover:text-purple-600 transition-colors">
+                            <i class="fas fa-moon text-lg"></i>
+                        </button>
+
+                        <!-- Menú Usuario -->
+                        <div class="relative">
+                            <button
+                                class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                                <div
+                                    class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                    <i
+                                        class="fas fa-user text-white text-sm"></i>
+                                </div>
+                                <i
+                                    class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <router-outlet></router-outlet>
+        </main>
+    </div>
 </div>

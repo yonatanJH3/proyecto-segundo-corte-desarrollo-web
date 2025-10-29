@@ -1,1 +1,226 @@
-<p>dashboard-page works!</p>
+<div class="bg-gray-50 p-6">
+    <div id="dashboard" class="section-content active fade-in">
+        <!-- Estadísticas Principales -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="stat-card border-blue-500 rounded-xl p-6 card-hover card-studens">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Estudiantes
+                            Activos</p>
+                        <p class="text-3xl font-bold text-blue-600"
+                            id="total-estudiantes">0</p>
+                        <div class="flex items-center mt-2">
+                            <i
+                                class="fas fa-arrow-up text-green-500 text-xs mr-1"></i>
+                            <span class="text-xs text-green-500">+12% este
+                                mes</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-100 p-4 rounded-full">
+                        <i
+                            class="fas fa-user-graduate text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar w-3/4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card border-green-500 rounded-xl p-6 card-hover card-teacher">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p
+                            class="text-sm font-medium text-gray-600">Docentes</p>
+                        <p class="text-3xl font-bold text-green-600"
+                            id="total-docentes">0</p>
+                        <div class="flex items-center mt-2">
+                            <i
+                                class="fas fa-arrow-up text-green-500 text-xs mr-1"></i>
+                            <span class="text-xs text-green-500">+5% este
+                                mes</span>
+                        </div>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-full">
+                        <i
+                            class="fas fa-chalkboard-teacher text-green-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar w-4/5"
+                            style="background: linear-gradient(90deg, #10b981, #059669);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card border-purple-500 rounded-xl p-6 card-hover card-group-active">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Grupos
+                            Activos</p>
+                        <p class="text-3xl font-bold text-purple-600"
+                            id="total-grupos">0</p>
+                        <div class="flex items-center mt-2">
+                            <i
+                                class="fas fa-arrow-up text-green-500 text-xs mr-1"></i>
+                            <span class="text-xs text-green-500">+8% este
+                                mes</span>
+                        </div>
+                    </div>
+                    <div class="bg-purple-100 p-4 rounded-full">
+                        <i class="fas fa-users text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar w-2/3"
+                            style="background: linear-gradient(90deg, #8b5cf6, #7c3aed);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card border-orange-500 rounded-xl p-6 card-hover card-general">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Promedio
+                            General</p>
+                        <p class="text-3xl font-bold text-orange-600"
+                            id="promedio-general">4.2</p>
+                        <div class="flex items-center mt-2">
+                            <i
+                                class="fas fa-arrow-up text-green-500 text-xs mr-1"></i>
+                            <span class="text-xs text-green-500">+0.3
+                                puntos</span>
+                        </div>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-full">
+                        <i
+                            class="fas fa-chart-line text-orange-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar w-5/6"
+                            style="background: linear-gradient(90deg, #f97316, #ea580c);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-6 mb-8">
+
+        <!-- Gráfico de Rendimiento -->
+        <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6 card-hover">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-gray-800">Rendimiento
+                    Académico</h3>
+                <select
+                    class="text-sm border border-gray-300 rounded-lg px-3 py-1">
+                    <option>Último mes</option>
+                    <option>Último trimestre</option>
+                    <option>Último año</option>
+                </select>
+            </div>
+            <div class="chart-container">
+                <canvas id="rendimiento-chart" width="1021" height="300"
+                    style="display: block; box-sizing: border-box; height: 300px; width: 1021.3px;"></canvas>
+            </div>
+        </div>
+
+        <!-- Actividad Reciente -->
+        <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+            <h3 class="text-lg font-semibold text-gray-800 mb-6">Actividad
+                Reciente</h3>
+            <div class="space-y-4" id="actividad-reciente">
+                <div class="flex items-start space-x-3 slide-in">
+                    <div
+                        class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-user-plus text-blue-600 text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-gray-800">Nuevo
+                            estudiante registrado</p>
+                        <p class="text-xs text-gray-500">María González - hace 2
+                            horas</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 slide-in">
+                    <div
+                        class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i
+                            class="fas fa-clipboard-check text-green-600 text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-gray-800">Notas
+                            actualizadas</p>
+                        <p class="text-xs text-gray-500">Matemáticas I - hace 4
+                            horas</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 slide-in">
+                    <div
+                        class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-users text-purple-600 text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-gray-800">Nuevo grupo
+                            creado</p>
+                        <p class="text-xs text-gray-500">Física II - hace 6
+                            horas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lo ultimo -->
+    <div class="grid md:grid-cols-2 gap-6">
+        <div
+            class="bg-gradient-to-r from-red-50 to-red-100 border border-red-200 rounded-xl p-6">
+            <div class="flex items-center space-x-3 mb-4">
+                <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                <h3 class="text-lg font-semibold text-red-800">Alertas
+                    Importantes</h3>
+            </div>
+            <div class="space-y-3">
+                <div class="bg-white rounded-lg p-3 border-l-4 border-red-500">
+                    <p class="text-sm font-medium text-gray-800">3 estudiantes
+                        con riesgo académico</p>
+                    <p class="text-xs text-gray-600">Requieren atención
+                        inmediata</p>
+                </div>
+                <div
+                    class="bg-white rounded-lg p-3 border-l-4 border-yellow-500">
+                    <p class="text-sm font-medium text-gray-800">5 notas
+                        pendientes de registro</p>
+                    <p class="text-xs text-gray-600">Fecha límite: mañana</p>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-6">
+            <div class="flex items-center space-x-3 mb-4">
+                <i class="fas fa-calendar-check text-blue-600 text-xl"></i>
+                <h3 class="text-lg font-semibold text-blue-800">Próximos
+                    Eventos</h3>
+            </div>
+            <div class="space-y-3">
+                <div class="bg-white rounded-lg p-3 border-l-4 border-blue-500">
+                    <p class="text-sm font-medium text-gray-800">Reunión de
+                        docentes</p>
+                    <p class="text-xs text-gray-600">Mañana 10:00 AM</p>
+                </div>
+                <div
+                    class="bg-white rounded-lg p-3 border-l-4 border-green-500">
+                    <p class="text-sm font-medium text-gray-800">Entrega de
+                        reportes</p>
+                    <p class="text-xs text-gray-600">Viernes 15 de Diciembre</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

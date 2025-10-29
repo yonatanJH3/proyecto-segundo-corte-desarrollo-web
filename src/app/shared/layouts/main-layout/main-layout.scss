@@ -1,74 +1,72 @@
-.main-layout {
-  display: flex;
-  height: 100vh;
-  background-color: #f5f6fa;
+header {
+  border-color: #e5e7eb;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.nav-active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 .sidebar {
-  width: 220px;
-  background-color: #2c3e50;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
+  background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
+}
 
-  .logo {
-    text-align: center;
-    margin-bottom: 2rem;
+.notification-badge {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
+  40% {
+    transform: translateY(-10px);
+  }
 
-    li {
-      margin-bottom: 1rem;
-
-      a {
-        color: #bdc3c7;
-        text-decoration: none;
-
-        &.active,
-        &:hover {
-          color: #fff;
-          font-weight: 600;
-        }
-      }
-    }
+  60% {
+    transform: translateY(-5px);
   }
 }
 
-.content-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.dark-mode {
+  background: #1a202c;
+  color: #e2e8f0;
 }
 
-.header {
-  height: 60px;
-  background-color: #fff;
-  border-bottom: 1px solid #e0e0e0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.5rem;
-}
-
-.logout-btn {
-  background-color: #e74c3c;
+.search-highlight {
+  background: linear-gradient(120deg, #fbbf24, #f59e0b);
+  padding: 2px 4px;
+  border-radius: 3px;
   color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #c0392b;
-  }
 }
 
-.main-content {
-  flex: 1;
-  padding: 1.5rem;
-  overflow-y: auto;
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
 }

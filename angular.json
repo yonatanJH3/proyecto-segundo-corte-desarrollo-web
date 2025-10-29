@@ -21,13 +21,16 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
+              "src/favicon.ico",
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",
@@ -59,20 +62,6 @@
           },
           "defaultConfiguration": "production"
         },
-        "server": {
-  "builder": "@angular-devkit/build-angular:server",
-  "options": {
-    "outputPath": "dist/academika-temp/server",
-    "main": "src/main.server.ts",
-    "tsConfig": "tsconfig.server.json"
-  },
-  "configurations": {
-    "production": {
-      "outputHashing": "media"
-    }
-  }
-}
-,
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
@@ -94,13 +83,16 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
+              "src/favicon.ico",
               {
-                "glob": "**/*",
-                "input": "public"
+              "glob": "**/*",
+              "input": "public"
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ]
           }
         }
@@ -108,6 +100,6 @@
     }
   },
   "cli": {
-    "analytics": "838dd8df-2e3f-4430-b7d5-160174157902"
+    "analytics": "8a07e94c-a3d1-4d77-baff-84b8bb6e9944"
   }
 }

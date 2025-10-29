@@ -1,0 +1,93 @@
+<!-- Sección Notas -->
+<div class="h-full overflow-y-auto p-6">
+    <div id="notas" class="section-content">
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Consulta de
+                Notas</h2>
+            <p class="text-gray-600">Consulta las calificaciones de los
+                estudiantes</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <!-- Filtros de búsqueda -->
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div>
+                    <label for="filtro-estudiante"
+                        class="block text-sm font-medium text-gray-700 mb-1">Estudiante</label>
+                    <select id="filtro-estudiante"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value>Todos los estudiantes</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="filtro-grupo"
+                        class="block text-sm font-medium text-gray-700 mb-1">Grupo</label>
+                    <select id="filtro-grupo"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value>Todos los grupos</option>
+                    </select>
+                </div>
+                <div class="flex items-end">
+                    <button id="btn-filtrar-notas"
+                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all">
+                        <i class="fas fa-search mr-2"></i>Buscar Notas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Estadísticas -->
+            <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div
+                    class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total
+                                Notas</p>
+                            <p class="text-2xl font-bold text-blue-600"
+                                id="total-notas">0</p>
+                        </div>
+                        <i
+                            class="fas fa-clipboard-list text-blue-600 text-2xl"></i>
+                    </div>
+                </div>
+                <div
+                    class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p
+                                class="text-sm font-medium text-gray-600">Promedio
+                                General</p>
+                            <p class="text-2xl font-bold text-green-600"
+                                id="promedio-institucional">0.0</p>
+                        </div>
+                        <i
+                            class="fas fa-chart-line text-green-600 text-2xl"></i>
+                    </div>
+                </div>
+                <div
+                    class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-4 border border-purple-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p
+                                class="text-sm font-medium text-gray-600">Estudiantes
+                                Evaluados</p>
+                            <p class="text-2xl font-bold text-purple-600"
+                                id="estudiantes-evaluados">0</p>
+                        </div>
+                        <i class="fas fa-users text-purple-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resultados -->
+            <div id="resultados-notas">
+                <div class="text-center py-12">
+                    <i
+                        class="fas fa-clipboard-list text-6xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">Usa los filtros para consultar las
+                        notas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,516 @@
+<!-- Sección Registro -->
+<div class="h-full overflow-y-auto p-6">
+    <div id="registro" class="section-content">
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Gestión de
+                Registro</h2>
+            <p class="text-gray-600">Administra estudiantes, docentes,
+                asignaturas y
+                aulas</p>
+        </div>
+
+        <!-- Tabs Mejorados -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="border-b bg-gray-50" style="border-color: #e5e7eb;">
+                <nav class="flex space-x-0">
+                    <button
+                        class="tab-btn flex-1 py-4 px-6 text-sm font-medium text-center border-b-2 border-purple-500 text-purple-600 bg-white"
+                        [ngClass]="{
+                        'border-purple-500 text-purple-600 bg-white': selectedTab === 'estudiantes-tab',
+                        'border-transparent text-gray-500 hover:text-gray-700': selectedTab !== 'estudiantes-tab'
+                    }"
+                        (click)="selectTab('estudiantes-tab')">
+                        <i class="fas fa-user-graduate mr-2"></i>Estudiantes
+                    </button>
+                    <button
+                        class="tab-btn flex-1 py-4 px-6 text-sm font-medium text-center border-b-2 border-transparent text-gray-500 hover:text-gray-700"
+                        [ngClass]="{
+                        'border-purple-500 text-purple-600 bg-white': selectedTab === 'docentes-tab',
+                        'border-transparent text-gray-500 hover:text-gray-700': selectedTab !== 'docentes-tab'
+                    }"
+                        (click)="selectTab('docentes-tab')">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>Docentes
+                    </button>
+                    <button
+                        class="tab-btn flex-1 py-4 px-6 text-sm font-medium text-center border-b-2 border-transparent text-gray-500 hover:text-gray-700"
+                        [ngClass]="{
+                        'border-purple-500 text-purple-600 bg-white': selectedTab === 'asignaturas-tab',
+                        'border-transparent text-gray-500 hover:text-gray-700': selectedTab !== 'asignaturas-tab'
+                    }"
+                        (click)="selectTab('asignaturas-tab')">
+                        <i class="fas fa-book mr-2"></i>Asignaturas
+                    </button>
+                    <button
+                        class="tab-btn flex-1 py-4 px-6 text-sm font-medium text-center border-b-2 border-transparent text-gray-500 hover:text-gray-700"
+                        [ngClass]="{
+                            'border-purple-500 text-purple-600 bg-white': selectedTab === 'aulas-tab',
+                            'border-transparent text-gray-500 hover:text-gray-700': selectedTab !== 'aulas-tab'
+                    }"
+                        (click)="selectTab('aulas-tab')">
+                        <i class="fas fa-door-open mr-2"></i>Aulas
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Contenido de Tabs -->
+            <div class="p-6">
+                <!-- Tab Estudiantes -->
+                <div id="estudiantes-tab" class="tab-content"
+                    [class.hidden]="selectedTab !== 'estudiantes-tab'">
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div
+                                class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                    <i
+                                        class="fas fa-user-plus text-blue-600 mr-2"></i>
+                                    Registrar Nuevo Estudiante
+                                </h3>
+                                <form id="form-estudiante" class="space-y-4">
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="est-nombre"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Nombre
+                                                Completo</label>
+                                            <input type="text" id="est-nombre"
+                                                required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label for="est-documento"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
+                                            <input type="text"
+                                                id="est-documento"
+                                                required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="est-email"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Correo
+                                            Electrónico</label>
+                                        <input type="email" id="est-email"
+                                            required
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="est-telefono"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                                            <input type="tel" id="est-telefono"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label for="est-fecha-nacimiento"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Fecha
+                                                de Nacimiento</label>
+                                            <input type="date"
+                                                id="est-fecha-nacimiento"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                                        </div>
+                                    </div>
+                                    <button type="submit"
+                                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:scale-105 font-medium">
+                                        <i
+                                            class="fas fa-save mr-2"></i>Registrar
+                                        Estudiante
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800">Lista
+                                    de Estudiantes</h3>
+                                <div class="flex items-center space-x-2">
+                                    <input type="text" id="buscar-estudiantes"
+                                        placeholder="Buscar..."
+                                        class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <button
+                                        class="p-2 text-gray-600 hover:text-blue-600">
+                                        <i class="fas fa-filter"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white rounded-lg border max-h-96 overflow-y-auto"
+                                style="border-color: #e5e7eb;">
+                                <div id="lista-estudiantes"
+                                    class="divide-y divide-gray-200">
+                                    <!-- Lista dinámica -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Docentes -->
+                <div id="docentes-tab" class="tab-content hidden"
+                    [class.hidden]="selectedTab !== 'docentes-tab'">
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div
+                                class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 border border-green-200">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                    <i
+                                        class="fas fa-chalkboard-teacher text-green-600 mr-2"></i>
+                                    Registrar Nuevo Docente
+                                </h3>
+                                <form id="form-docente" class="space-y-4">
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="doc-nombre"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Nombre
+                                                Completo</label>
+                                            <input type="text" id="doc-nombre"
+                                                required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label for="doc-documento"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
+                                            <input type="text"
+                                                id="doc-documento"
+                                                required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="doc-email"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Correo
+                                            Electrónico</label>
+                                        <input type="email" id="doc-email"
+                                            required
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="doc-telefono"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                                            <input type="tel" id="doc-telefono"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label for="doc-especialidad"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Especialidad</label>
+                                            <input type="text"
+                                                id="doc-especialidad"
+                                                required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="doc-titulo"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Título
+                                            Académico</label>
+                                        <select id="doc-titulo" required
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                                            <option value>Seleccionar
+                                                título</option>
+                                            <option
+                                                value="Licenciatura">Licenciatura</option>
+                                            <option
+                                                value="Maestría">Maestría</option>
+                                            <option
+                                                value="Doctorado">Doctorado</option>
+                                            <option
+                                                value="Especialización">Especialización</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit"
+                                        class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 px-6 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105 font-medium">
+                                        <i
+                                            class="fas fa-save mr-2"></i>Registrar
+                                        Docente
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800">Lista
+                                    de Docentes</h3>
+                                <div class="flex items-center space-x-2">
+                                    <input type="text" id="buscar-docentes"
+                                        placeholder="Buscar..."
+                                        class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                    <button
+                                        class="p-2 text-gray-600 hover:text-green-600">
+                                        <i class="fas fa-filter"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white rounded-lg border max-h-96 overflow-y-auto"
+                                style="border-color: #e5e7eb;">
+                                <div id="lista-docentes"
+                                    class="divide-y divide-gray-200">
+                                    <!-- Lista dinámica -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Asignaturas -->
+                <div id="asignaturas-tab" class="tab-content hidden"
+                    [class.hidden]="selectedTab !== 'asignaturas-tab'">
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div
+                                class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-6 border border-purple-200">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                    <i
+                                        class="fas fa-book text-purple-600 mr-2"></i>
+                                    Registrar Nueva Asignatura
+                                </h3>
+                                <form id="form-asignatura" class="space-y-4">
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="asig-nombre"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Nombre
+                                                de la Asignatura</label>
+                                            <input type="text" id="asig-nombre"
+                                                required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label for="asig-codigo"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Código</label>
+                                            <input type="text" id="asig-codigo"
+                                                required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                        </div>
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="asig-creditos"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Créditos</label>
+                                            <input type="number"
+                                                id="asig-creditos"
+                                                min="1" max="10" required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label for="asig-semestre"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Semestre</label>
+                                            <select id="asig-semestre" required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                                <option value>Seleccionar
+                                                    semestre</option>
+                                                <option value="1">Primer
+                                                    Semestre</option>
+                                                <option value="2">Segundo
+                                                    Semestre</option>
+                                                <option value="3">Tercer
+                                                    Semestre</option>
+                                                <option value="4">Cuarto
+                                                    Semestre</option>
+                                                <option value="5">Quinto
+                                                    Semestre</option>
+                                                <option value="6">Sexto
+                                                    Semestre</option>
+                                                <option value="7">Séptimo
+                                                    Semestre</option>
+                                                <option value="8">Octavo
+                                                    Semestre</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="asig-descripcion"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+                                        <textarea id="asig-descripcion" rows="3"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"></textarea>
+                                    </div>
+                                    <button type="submit"
+                                        class="w-full bg-gradient-to-r from-purple-600 to-violet-600 text-white py-3 px-6 rounded-lg hover:from-purple-700 hover:to-violet-700 transition-all transform hover:scale-105 font-medium">
+                                        <i
+                                            class="fas fa-save mr-2"></i>Registrar
+                                        Asignatura
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800">Lista
+                                    de Asignaturas</h3>
+                                <div class="flex items-center space-x-2">
+                                    <input type="text" id="buscar-asignaturas"
+                                        placeholder="Buscar..."
+                                        class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                    <button
+                                        class="p-2 text-gray-600 hover:text-purple-600">
+                                        <i class="fas fa-filter"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white rounded-lg border max-h-96 overflow-y-auto"
+                                style="border-color: #e5e7eb;">
+                                <div id="lista-asignaturas"
+                                    class="divide-y divide-gray-200">
+                                    <!-- Lista dinámica -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Aulas -->
+                <div id="aulas-tab" class="tab-content hidden"
+                    [class.hidden]="selectedTab !== 'aulas-tab'">
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div
+                                class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg p-6 border border-orange-200">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                    <i
+                                        class="fas fa-door-open text-orange-600 mr-2"></i>
+                                    Registrar Nueva Aula
+                                </h3>
+                                <form id="form-aula" class="space-y-4">
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="aula-nombre"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Nombre
+                                                del Aula</label>
+                                            <input type="text" id="aula-nombre"
+                                                required
+                                                placeholder="Ej: Aula 101"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label for="aula-codigo"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Código</label>
+                                            <input type="text" id="aula-codigo"
+                                                required placeholder="Ej: A101"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
+                                        </div>
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="aula-capacidad"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Capacidad</label>
+                                            <input type="number"
+                                                id="aula-capacidad"
+                                                min="1" max="100" required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label for="aula-tipo"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Tipo
+                                                de Aula</label>
+                                            <select id="aula-tipo" required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
+                                                <option value>Seleccionar
+                                                    tipo</option>
+                                                <option
+                                                    value="Aula Regular">Aula
+                                                    Regular</option>
+                                                <option
+                                                    value="Laboratorio">Laboratorio</option>
+                                                <option
+                                                    value="Auditorio">Auditorio</option>
+                                                <option
+                                                    value="Sala de Conferencias">Sala
+                                                    de Conferencias</option>
+                                                <option
+                                                    value="Biblioteca">Biblioteca</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="aula-ubicacion"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
+                                        <input type="text" id="aula-ubicacion"
+                                            placeholder="Ej: Edificio A, Piso 1"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700 mb-2">Equipamiento</label>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="equip-proyector"
+                                                    class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Proyector</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="equip-computador"
+                                                    class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Computador</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="equip-aire"
+                                                    class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Aire
+                                                    Acondicionado</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="equip-sonido"
+                                                    class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Sistema
+                                                    de Sonido</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit"
+                                        class="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-white py-3 px-6 rounded-lg hover:from-orange-700 hover:to-amber-700 transition-all transform hover:scale-105 font-medium">
+                                        <i
+                                            class="fas fa-save mr-2"></i>Registrar
+                                        Aula
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800">Lista
+                                    de Aulas</h3>
+                                <div class="flex items-center space-x-2">
+                                    <input type="text" id="buscar-aulas"
+                                        placeholder="Buscar..."
+                                        class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                    <button
+                                        class="p-2 text-gray-600 hover:text-orange-600">
+                                        <i class="fas fa-filter"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white rounded-lg border max-h-96 overflow-y-auto"
+                                style="border-color: #e5e7eb;">
+                                <div id="lista-aulas"
+                                    class="divide-y divide-gray-200">
+                                    <!-- Lista dinámica -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

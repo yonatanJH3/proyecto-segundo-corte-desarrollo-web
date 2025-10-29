@@ -1,0 +1,312 @@
+<!-- Sección Grupos -->
+<div class="h-full overflow-y-auto p-6">
+    <div id="grupos" class="section-content">
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Gestión de Grupos
+                Académicos</h2>
+            <p class="text-gray-600">Crea y administra grupos de asignaturas</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="border-b bg-gray-50" style="border-color: #e5e7eb;">
+                <nav class="flex space-x-0">
+                    <button data-tab-grupo="crear-grupo-tab"
+                        class="tab-grupo-btn flex-1 py-4 px-6 text-sm font-medium text-center border-b-2 border-purple-500 text-purple-600 bg-white"
+                        [ngClass]="{
+                        'border-purple-500 text-purple-600 bg-white': selectedTab === 'crear-grupo-tab',
+                        'border-transparent text-gray-500 hover:text-gray-700': selectedTab !== 'crear-grupo-tab'
+                        }"
+                        (click)="selectTab('crear-grupo-tab')">
+                        <i class="fas fa-plus mr-2"></i>Crear Grupo
+                    </button>
+                    <button data-tab-grupo="inscripciones-tab"
+                        class="tab-grupo-btn flex-1 py-4 px-6 text-sm font-medium text-center border-b-2 border-transparent text-gray-500 hover:text-gray-700"
+                        [ngClass]="{
+                        'border-purple-500 text-purple-600 bg-white': selectedTab === 'inscripciones-tab',
+                        'border-transparent text-gray-500 hover:text-gray-700': selectedTab !== 'inscripciones-tab'
+                        }"
+                        (click)="selectTab('inscripciones-tab')">
+                        <i class="fas fa-user-plus mr-2"></i>Inscripciones
+                    </button>
+                    <button data-tab-grupo="lista-grupos-tab"
+                        class="tab-grupo-btn flex-1 py-4 px-6 text-sm font-medium text-center border-b-2 border-transparent text-gray-500 hover:text-gray-700"
+                        [ngClass]="{
+                        'border-purple-500 text-purple-600 bg-white': selectedTab === 'lista-grupos-tab',
+                        'border-transparent text-gray-500 hover:text-gray-700': selectedTab !== 'lista-grupos-tab'
+                        }"
+                        (click)="selectTab('lista-grupos-tab')">
+                        <i class="fas fa-list mr-2"></i>Lista de Grupos
+                    </button>
+                </nav>
+            </div>
+
+            <div class="p-6">
+                <!-- Tab Crear Grupo -->
+                <div id="crear-grupo-tab" class="tab-grupo-content" [class.hidden]="selectedTab !== 'crear-grupo-tab'">
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div
+                                class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-6 border border-purple-200">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                    <i
+                                        class="fas fa-users text-purple-600 mr-2"></i>
+                                    Crear Nuevo Grupo
+                                </h3>
+                                <form id="form-grupo" class="space-y-4">
+                                    <div>
+                                        <label for="grupo-nombre"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Nombre
+                                            del Grupo</label>
+                                        <input type="text" id="grupo-nombre"
+                                            required
+                                            placeholder="Ej: Grupo A - Matemáticas I"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="grupo-asignatura"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Asignatura</label>
+                                            <select id="grupo-asignatura"
+                                                required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                                <option value>Seleccionar
+                                                    asignatura</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="grupo-docente"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Docente</label>
+                                            <select id="grupo-docente" required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                                <option value>Seleccionar
+                                                    docente</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="grupo-aula"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Aula</label>
+                                            <select id="grupo-aula" required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                                <option value>Seleccionar
+                                                    aula</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="grupo-cupos"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Cupos</label>
+                                            <input type="number"
+                                                id="grupo-cupos"
+                                                min="1" max="50" required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                        </div>
+                                    </div>
+
+                                    <!-- Días de la semana -->
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700 mb-2">Días
+                                            de la semana</label>
+                                        <div class="grid grid-cols-3 gap-2">
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="dia-lunes" value="Lunes"
+                                                    class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Lunes</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="dia-martes"
+                                                    value="Martes"
+                                                    class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Martes</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="dia-miercoles"
+                                                    value="Miércoles"
+                                                    class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Miércoles</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="dia-jueves"
+                                                    value="Jueves"
+                                                    class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Jueves</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="dia-viernes"
+                                                    value="Viernes"
+                                                    class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Viernes</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox"
+                                                    id="dia-sabado"
+                                                    value="Sábado"
+                                                    class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                                                <span
+                                                    class="ml-2 text-sm text-gray-700">Sábado</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Horarios -->
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="grupo-hora-inicio"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Hora
+                                                de Inicio</label>
+                                            <input type="time"
+                                                id="grupo-hora-inicio" required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label for="grupo-hora-fin"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Hora
+                                                de Fin</label>
+                                            <input type="time"
+                                                id="grupo-hora-fin"
+                                                required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="grupo-periodo"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Período</label>
+                                        <select id="grupo-periodo" required
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
+                                            <option value>Seleccionar
+                                                período</option>
+                                            <option
+                                                value="2024-1">2024-1</option>
+                                            <option
+                                                value="2024-2">2024-2</option>
+                                            <option
+                                                value="2025-1">2025-1</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit"
+                                        class="w-full bg-gradient-to-r from-purple-600 to-violet-600 text-white py-3 px-6 rounded-lg hover:from-purple-700 hover:to-violet-700 transition-all transform hover:scale-105 font-medium">
+                                        <i class="fas fa-save mr-2"></i>Crear
+                                        Grupo
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3
+                                class="text-lg font-semibold text-gray-800 mb-4">Grupos
+                                Recientes</h3>
+                            <div id="grupos-recientes" class="space-y-3">
+                                <p class="text-gray-500 text-sm">No hay grupos
+                                    creados aún</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Inscripciones -->
+                <div id="inscripciones-tab" class="tab-grupo-content hidden" [class.hidden]="selectedTab !== 'inscripciones-tab'">
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div
+                                class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 border border-green-200">
+                                <h3
+                                    class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                    <i
+                                        class="fas fa-user-plus text-green-600 mr-2"></i>
+                                    Inscribir Estudiantes
+                                </h3>
+                                <form id="form-inscripcion" class="space-y-4">
+                                    <div>
+                                        <label for="inscr-grupo"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Grupo</label>
+                                        <select id="inscr-grupo" required
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                                            <option value>Seleccionar
+                                                grupo</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700 mb-2">Estudiantes
+                                            Disponibles</label>
+                                        <div
+                                            class="border border-gray-300 rounded-lg max-h-64 overflow-y-auto">
+                                            <div
+                                                id="lista-estudiantes-disponibles"
+                                                class="divide-y divide-gray-200">
+                                                <p style="background-color: white;"
+                                                    class="p-4 text-gray-500 text-sm">Selecciona
+                                                    un grupo primero</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit"
+                                        class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 px-6 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105 font-medium">
+                                        <i
+                                            class="fas fa-user-plus mr-2"></i>Inscribir
+                                        Estudiantes Seleccionados
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3
+                                class="text-lg font-semibold text-gray-800 mb-4">Inscripciones
+                                Recientes</h3>
+                            <div
+                                class="bg-white rounded-lg border max-h-96 overflow-y-auto">
+                                <div id="lista-inscripciones-recientes"
+                                    class="divide-y divide-gray-200">
+                                    <p class="p-4 text-gray-500 text-sm">No hay
+                                        inscripciones registradas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Lista de Grupos -->
+                <div id="lista-grupos-tab" class="tab-grupo-content hidden" [class.hidden]="selectedTab !== 'lista-grupos-tab'">
+                    <div class="mb-4 flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-800">Todos
+                            los
+                            Grupos</h3>
+                        <div class="flex items-center space-x-2">
+                            <input type="text" placeholder="Buscar grupos..."
+                                class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            <button
+                                class="p-2 text-gray-600 hover:text-purple-600">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="lista-todos-grupos" class="grid gap-6">
+                        <div class="text-center py-12">
+                            <i
+                                class="fas fa-users text-6xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500">No hay grupos registrados
+                                aún</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
