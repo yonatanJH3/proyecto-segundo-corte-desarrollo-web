@@ -5,8 +5,9 @@
             <div class="p-6">
                 <div class="flex items-center space-x-3 mb-8">
                     <div
-                        class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                        class="w-10 h-10 bg-gradient-to-r rounded-lg flex items-center justify-center">
+                        <img src="assets/logoNavbar.png" alt="Academika Logo"
+                            class="logo" />
                     </div>
                     <div>
                         <h1 class="text-xl font-bold text-white">Academika</h1>
@@ -37,7 +38,7 @@
 
                 <!-- Navegación -->
                 <nav class="space-y-2">
-                    <a
+                    <a *ngIf="isSuperAdmin() || isAdmin()"
                         routerLink="/dashboard"
                         routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
                         [routerLinkActiveOptions]="{ exact: true }"
@@ -48,7 +49,7 @@
                             class="ml-auto notification-badge bg-red-500 text-white text-xs px-2 py-1 rounded-full">3</span>
                     </a>
 
-                    <a
+                    <a *ngIf="isSuperAdmin() || isAdmin()"
                         routerLink="/gestion"
                         routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
                         class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
@@ -56,7 +57,7 @@
                         <span>Registro</span>
                     </a>
 
-                    <a
+                    <a *ngIf="isSuperAdmin() || isAdmin()"
                         routerLink="/groups"
                         routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
                         class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
@@ -64,7 +65,7 @@
                         <span>Grupos</span>
                     </a>
 
-                    <a
+                    <a *ngIf="isSuperAdmin() || isAdmin() || isDocente()"
                         routerLink="/grading"
                         routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
                         class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
@@ -72,7 +73,7 @@
                         <span>Notas</span>
                     </a>
 
-                    <a
+                    <a *ngIf="isSuperAdmin() || isAdmin() || isDocente() || isStudent()"
                         routerLink="/consultation"
                         routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
                         class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
@@ -80,7 +81,7 @@
                         <span>Consultas</span>
                     </a>
 
-                    <a
+                    <a *ngIf="isSuperAdmin() || isAdmin() || isDocente() || isStudent()"
                         routerLink="/reports"
                         routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
                         class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
@@ -88,7 +89,7 @@
                         <span>Reportes</span>
                     </a>
 
-                    <a
+                    <a *ngIf="isSuperAdmin() || isAdmin()"
                         routerLink="/configuration"
                         routerLinkActive="bg-purple-600 text-white shadow-lg shadow-purple-500/40"
                         class="w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all">
@@ -128,7 +129,8 @@
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
                         <h2 id="page-title"
-                            class="text-2xl font-bold text-gray-800">Dashboard</h2>
+                            class="text-2xl font-bold text-gray-800">{{
+                            pageTitle }}</h2>
                         <div
                             class="hidden md:flex items-center space-x-2 text-sm text-gray-500">
                             <i class="fas fa-calendar-alt"></i>
@@ -162,18 +164,32 @@
                         </button>
 
                         <!-- Menú Usuario -->
-                        <div class="relative">
+                        <div class="relative" (click)="toggleMenu()">
                             <button
-                                class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                                class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none">
                                 <div
                                     class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                                    <i
-                                        class="fas fa-user text-white text-sm"></i>
+                                    <i class="fas fa-user text-white text-sm"></i>
                                 </div>
-                                <i
-                                    class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                                <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
                             </button>
+                            <div *ngIf="isMenuOpen"
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-1 z-50 transform origin-top-right transition-all duration-150 ease-out"
+                                > <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user-circle mr-2"></i>
+                                    Perfil
+                                </a>
+                                <div
+                                    class="border-t border-gray-100 my-1"></div>
+                                <a (click)="logouts()"
+                                    class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 cursor-pointer">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>
+                                    Cerrar Sesión
+                                </a>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </header>

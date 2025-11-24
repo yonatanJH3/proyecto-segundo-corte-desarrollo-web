@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 
@@ -17,47 +11,57 @@ import { AuthService } from '../../../../core/services/auth.service';
   imports: [
     CommonModule, 
     FormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatCheckboxModule
+    ReactiveFormsModule
   ],
   templateUrl: './login-page.html',
   styleUrls: ['./login-page.scss'],
 })
 export class LoginPageComponent {
-  loginForm!: FormGroup;
-  errorMessage: string = '';
-  hide = true;
+  username = '';
+  password = '';
+  keepLoggedIn = false;
+  loading = false;
+  errorMessage = '';
 
   constructor(
-    private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      rememberMe: [false]
+   
+  }
+
+  async onSubmit() {
+   if (!this.username || !this.password) {
+      this.errorMessage = 'Complete los campos correctamente';
+      return;
+    }
+
+    this.loading = true;
+    this.errorMessage = '';
+
+    const req = {
+      username: this.username,       // Tu backend espera `username`
+      password: this.password,
+      deviceId: 'web-client',
+      ipAddress: ''               // lo puedes llenar luego si usas IP real
+    };
+
+    this.authService.login(req).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage =
+          err.error?.message || 'Credenciales inválidas';
+      }
     });
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe({
-        next: (res) => {
-          localStorage.setItem('token', res.token);
-          this.router.navigate(['/dashboard']);
-        },
-        error: () => {
-          this.errorMessage = 'Email o contraseña incorrectos';
-        }
-      });
-    }
+  async onResetPassword(){
+    this.router.navigate(['/auth/register']);
   }
 }

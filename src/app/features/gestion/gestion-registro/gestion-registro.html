@@ -67,13 +67,17 @@
                                         class="fas fa-user-plus text-blue-600 mr-2"></i>
                                     Registrar Nuevo Estudiante
                                 </h3>
-                                <form id="form-estudiante" class="space-y-4">
+                                <!-- Formulario conectado a Reactive Forms -->
+                                <form [formGroup]="estudianteForm"
+                                    (ngSubmit)="guardarEstudiante()"
+                                    id="form-estudiante" class="space-y-4">
                                     <div class="grid md:grid-cols-2 gap-4">
                                         <div>
                                             <label for="est-nombre"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Nombre
                                                 Completo</label>
                                             <input type="text" id="est-nombre"
+                                                formControlName="name"
                                                 required
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
                                         </div>
@@ -82,6 +86,7 @@
                                                 class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
                                             <input type="text"
                                                 id="est-documento"
+                                                formControlName="documentNumber"
                                                 required
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
                                         </div>
@@ -91,6 +96,7 @@
                                             class="block text-sm font-medium text-gray-700 mb-1">Correo
                                             Electrónico</label>
                                         <input type="email" id="est-email"
+                                            formControlName="email"
                                             required
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
                                     </div>
@@ -99,6 +105,7 @@
                                             <label for="est-telefono"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
                                             <input type="tel" id="est-telefono"
+                                                formControlName="phone"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
                                         </div>
                                         <div>
@@ -106,11 +113,13 @@
                                                 class="block text-sm font-medium text-gray-700 mb-1">Fecha
                                                 de Nacimiento</label>
                                             <input type="date"
+                                                formControlName="dateOfBirth"
                                                 id="est-fecha-nacimiento"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
                                         </div>
                                     </div>
                                     <button type="submit"
+                                        [disabled]="estudianteForm.invalid || isSubmitting"
                                         class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:scale-105 font-medium">
                                         <i
                                             class="fas fa-save mr-2"></i>Registrar
@@ -126,7 +135,8 @@
                                     class="text-lg font-semibold text-gray-800">Lista
                                     de Estudiantes</h3>
                                 <div class="flex items-center space-x-2">
-                                    <input type="text" id="buscar-estudiantes"
+                                    <input type="text"
+                                        [formControl]="buscarControl"
                                         placeholder="Buscar..."
                                         class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <button
@@ -137,13 +147,59 @@
                             </div>
                             <div
                                 class="bg-white rounded-lg border max-h-96 overflow-y-auto"
-                                style="border-color: #e5e7eb;">
-                                <div id="lista-estudiantes"
-                                    class="divide-y divide-gray-200">
+                                style="border-color: #e5e7eb;"
+                                *ngIf="selectedTab === 'estudiantes-tab'">
+                                <div class="divide-y divide-gray-200">
                                     <!-- Lista dinámica -->
+
+                                    <div
+                                        *ngFor="let estudiante of filteredEstudiantes"
+                                        class="p-4 hover:bg-gray-50 transition-colors">
+                                        <div
+                                            class="flex items-center justify-between">
+                                            <div
+                                                class="flex items-center space-x-3">
+                                                <div
+                                                    class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
+                                                    <i
+                                                        class="fas fa-user text-white text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <p
+                                                        class="font-medium text-gray-900">{{
+                                                        estudiante.name }}</p>
+                                                    <p
+                                                        class="text-sm text-gray-600">{{
+                                                        estudiante.email }}</p>
+                                                    <p
+                                                        class="text-xs text-gray-500">Doc:
+                                                        {{
+                                                        estudiante.documentNumber
+                                                        }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                                                    [ngClass]="{
+                                                                'bg-green-100 text-green-800': estudiante.enabled,
+                                                                'bg-red-100 text-red-800': !estudiante.enabled
+                                                                }">
+                                                    {{ estudiante.enabled ?
+                                                    'Activo' : 'Inactivo' }}
+                                                </span>
+                                                <p
+                                                    class="text-xs text-gray-500 mt-1">Reg:
+                                                    {{ estudiante.createdAt
+                                                    }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -160,13 +216,16 @@
                                         class="fas fa-chalkboard-teacher text-green-600 mr-2"></i>
                                     Registrar Nuevo Docente
                                 </h3>
-                                <form id="form-docente" class="space-y-4">
+                                <form [formGroup]="docenteForm"
+                                    (ngSubmit)="guardarDocentes()"
+                                    class="space-y-4">
                                     <div class="grid md:grid-cols-2 gap-4">
                                         <div>
                                             <label for="doc-nombre"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Nombre
                                                 Completo</label>
-                                            <input type="text" id="doc-nombre"
+                                            <input type="text"
+                                                formControlName="name"
                                                 required
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
                                         </div>
@@ -174,7 +233,7 @@
                                             <label for="doc-documento"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
                                             <input type="text"
-                                                id="doc-documento"
+                                                formControlName="documentNumber"
                                                 required
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
                                         </div>
@@ -184,6 +243,7 @@
                                             class="block text-sm font-medium text-gray-700 mb-1">Correo
                                             Electrónico</label>
                                         <input type="email" id="doc-email"
+                                            formControlName="email"
                                             required
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
                                     </div>
@@ -192,6 +252,7 @@
                                             <label for="doc-telefono"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
                                             <input type="tel" id="doc-telefono"
+                                                formControlName="phone"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
                                         </div>
                                         <div>
@@ -199,6 +260,7 @@
                                                 class="block text-sm font-medium text-gray-700 mb-1">Especialidad</label>
                                             <input type="text"
                                                 id="doc-especialidad"
+                                                formControlName="speciality"
                                                 required
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
                                         </div>
@@ -208,6 +270,7 @@
                                             class="block text-sm font-medium text-gray-700 mb-1">Título
                                             Académico</label>
                                         <select id="doc-titulo" required
+                                            formControlName="academicDegree"
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
                                             <option value>Seleccionar
                                                 título</option>
@@ -238,6 +301,7 @@
                                     de Docentes</h3>
                                 <div class="flex items-center space-x-2">
                                     <input type="text" id="buscar-docentes"
+                                        [formControl]="buscarControlDocentes"
                                         placeholder="Buscar..."
                                         class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                                     <button
@@ -252,6 +316,50 @@
                                 <div id="lista-docentes"
                                     class="divide-y divide-gray-200">
                                     <!-- Lista dinámica -->
+
+                                    <div
+                                        *ngFor="let docentes of filtereDocentes"
+                                        class="p-4 hover:bg-gray-50 transition-colors">
+                                        <div
+                                            class="flex items-center justify-between">
+                                            <div
+                                                class="flex items-center space-x-3">
+                                                <div
+                                                    class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                                                    <i
+                                                        class="fas fa-chalkboard-teacher text-white text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <p
+                                                        class="font-medium text-gray-900">{{
+                                                        docentes.name }}</p>
+                                                    <p
+                                                        class="text-sm text-gray-600">{{
+                                                        docentes.speciality
+                                                        }}</p>
+                                                    <p
+                                                        class="text-xs text-gray-500">{{docentes.academicDegree}}
+                                                        -
+                                                        {{docentes.email}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                                                    [ngClass]="{
+                                                                'bg-green-100 text-green-800': docentes.enabled,
+                                                                'bg-red-100 text-red-800': !docentes.enabled
+                                                                }">
+                                                    {{ docentes.enabled ?
+                                                    'Activo' : 'Inactivo' }}
+                                                </span>
+                                                <p
+                                                    class="text-xs text-gray-500 mt-1">Reg:
+                                                    {{docentes.dateOfBirth}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -271,13 +379,14 @@
                                         class="fas fa-book text-purple-600 mr-2"></i>
                                     Registrar Nueva Asignatura
                                 </h3>
-                                <form id="form-asignatura" class="space-y-4">
+                                <form [formGroup]="coursesForm" (ngSubmit)="guardarCourses()" id="form-asignatura" class="space-y-4">
                                     <div class="grid md:grid-cols-2 gap-4">
                                         <div>
                                             <label for="asig-nombre"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Nombre
                                                 de la Asignatura</label>
                                             <input type="text" id="asig-nombre"
+                                                formControlName="courseName"
                                                 required
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
                                         </div>
@@ -285,6 +394,7 @@
                                             <label for="asig-codigo"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Código</label>
                                             <input type="text" id="asig-codigo"
+                                                formControlName="courseCode"
                                                 required
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
                                         </div>
@@ -294,6 +404,7 @@
                                             <label for="asig-creditos"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Créditos</label>
                                             <input type="number"
+                                                formControlName="credits"
                                                 id="asig-creditos"
                                                 min="1" max="10" required
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
@@ -302,6 +413,7 @@
                                             <label for="asig-semestre"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Semestre</label>
                                             <select id="asig-semestre" required
+                                                formControlName="semester"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all">
                                                 <option value>Seleccionar
                                                     semestre</option>
@@ -328,6 +440,7 @@
                                         <label for="asig-descripcion"
                                             class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
                                         <textarea id="asig-descripcion" rows="3"
+                                            formControlName="description"
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"></textarea>
                                     </div>
                                     <button type="submit"
@@ -347,6 +460,7 @@
                                     de Asignaturas</h3>
                                 <div class="flex items-center space-x-2">
                                     <input type="text" id="buscar-asignaturas"
+                                        [formControl]="buscarControlAsignatura"
                                         placeholder="Buscar..."
                                         class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
                                     <button
@@ -361,6 +475,47 @@
                                 <div id="lista-asignaturas"
                                     class="divide-y divide-gray-200">
                                     <!-- Lista dinámica -->
+
+                                    <div
+                                        *ngFor="let asignatura of filtereAsignatura"
+                                        class="p-4 hover:bg-gray-50 transition-colors">
+                                        <div
+                                            class="flex items-center justify-between">
+                                            <div
+                                                class="flex items-center space-x-3">
+                                                <div
+                                                    class="w-10 h-10 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
+                                                    <i
+                                                        class="fas fa-book text-white text-sm"></i>
+                                                </div>
+                                                <div>
+                                                    <p
+                                                        class="font-medium text-gray-900">{{
+                                                        asignatura.courseName
+                                                        }}</p>
+                                                    <p
+                                                        class="text-sm text-gray-600">Código:
+                                                        {{ asignatura.courseCode
+                                                        }}</p>
+                                                    <p
+                                                        class="text-xs text-gray-500">{{
+                                                        asignatura.semester }} -
+                                                        {{ asignatura.credits
+                                                        }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                                    Activa
+                                                </span>
+                                                <p
+                                                    class="text-xs text-gray-500 mt-1">Reg:
+                                                    2025-11-24</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -380,13 +535,16 @@
                                         class="fas fa-door-open text-orange-600 mr-2"></i>
                                     Registrar Nueva Aula
                                 </h3>
-                                <form id="form-aula" class="space-y-4">
+                                <form id="form-aula"
+                                    [formGroup]="classroomsForm"
+                                    (ngSubmit)="guardarAula()"
+                                    class="space-y-4">
                                     <div class="grid md:grid-cols-2 gap-4">
                                         <div>
                                             <label for="aula-nombre"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Nombre
                                                 del Aula</label>
-                                            <input type="text" id="aula-nombre"
+                                            <input type="text" id="aula-nombre" formControlName="roomName"
                                                 required
                                                 placeholder="Ej: Aula 101"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
@@ -394,7 +552,7 @@
                                         <div>
                                             <label for="aula-codigo"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Código</label>
-                                            <input type="text" id="aula-codigo"
+                                            <input type="text" id="aula-codigo" formControlName="roomCode"
                                                 required placeholder="Ej: A101"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
                                         </div>
@@ -403,7 +561,7 @@
                                         <div>
                                             <label for="aula-capacidad"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Capacidad</label>
-                                            <input type="number"
+                                            <input type="number" formControlName="capacity"
                                                 id="aula-capacidad"
                                                 min="1" max="100" required
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
@@ -412,9 +570,9 @@
                                             <label for="aula-tipo"
                                                 class="block text-sm font-medium text-gray-700 mb-1">Tipo
                                                 de Aula</label>
-                                            <select id="aula-tipo" required
+                                            <select id="aula-tipo" required formControlName="roomType"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
-                                                <option value>Seleccionar
+                                                <option value>Seleccionar 
                                                     tipo</option>
                                                 <option
                                                     value="Aula Regular">Aula
@@ -434,7 +592,7 @@
                                     <div>
                                         <label for="aula-ubicacion"
                                             class="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
-                                        <input type="text" id="aula-ubicacion"
+                                        <input type="text" id="aula-ubicacion" formControlName="location"
                                             placeholder="Ej: Edificio A, Piso 1"
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
                                     </div>
@@ -443,21 +601,21 @@
                                             class="block text-sm font-medium text-gray-700 mb-2">Equipamiento</label>
                                         <div class="grid grid-cols-2 gap-2">
                                             <label class="flex items-center">
-                                                <input type="checkbox"
+                                                <input type="checkbox" formControlName="hasProjector"
                                                     id="equip-proyector"
                                                     class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
                                                 <span
                                                     class="ml-2 text-sm text-gray-700">Proyector</span>
                                             </label>
                                             <label class="flex items-center">
-                                                <input type="checkbox"
+                                                <input type="checkbox" formControlName="hasAirConditioning"
                                                     id="equip-computador"
                                                     class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
                                                 <span
                                                     class="ml-2 text-sm text-gray-700">Computador</span>
                                             </label>
                                             <label class="flex items-center">
-                                                <input type="checkbox"
+                                                <input type="checkbox"  formControlName="hasComputer"
                                                     id="equip-aire"
                                                     class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
                                                 <span
@@ -465,7 +623,7 @@
                                                     Acondicionado</span>
                                             </label>
                                             <label class="flex items-center">
-                                                <input type="checkbox"
+                                                <input type="checkbox" formControlName="hasSoundSystem"
                                                     id="equip-sonido"
                                                     class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
                                                 <span
@@ -505,6 +663,49 @@
                                 <div id="lista-aulas"
                                     class="divide-y divide-gray-200">
                                     <!-- Lista dinámica -->
+
+                                    <div class="p-4 hover:bg-gray-50 transition-colors" *ngFor="let classrooms of filtereClassrooms">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-door-open text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900">{{
+                                                        classrooms.roomName
+                                                        }}</p>
+                                <p class="text-sm text-gray-600">{{
+                                                        classrooms.roomType
+                                                        }} - {{
+                                                        classrooms.capacity
+                                                        }}</p>
+                                <p class="text-xs text-gray-500">{{
+                                                        classrooms.location
+                                                        }}</p>
+                                <p class="text-xs text-blue-600">Equipos: {{
+                                                        classrooms.hasAirConditioning
+                                                        }} {{
+                                                        classrooms.hasComputer
+                                                        }}
+                                                        {{
+                                                        classrooms.hasProjector
+                                                        }}
+                                                        {{
+                                                        classrooms.hasSoundSystem
+                                                        }}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Disponible
+                            </span>
+                            <p class="text-xs text-gray-500 mt-1">Reg: 2025-11-24</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
                                 </div>
                             </div>
                         </div>

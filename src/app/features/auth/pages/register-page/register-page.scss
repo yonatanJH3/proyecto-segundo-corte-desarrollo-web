@@ -1,0 +1,101 @@
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #eef2f7, #f9fafc);
+  font-family: 'Inter', sans-serif;
+}
+
+.auth-card {
+  background: #ffffff;
+  width: 400px;
+  padding: 40px 35px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  animation: fadeIn 0.4s ease-in;
+}
+
+.app-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #1f2d3d;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #6c757d;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 6px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dcdfe3;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.input-group input.invalid {
+  border-color: #ff6b6b;
+  background: #fff5f5;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+}
+
+.primary-btn {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-btn:hover {
+  background-color: #0056d2;
+}
+
+.primary-btn:disabled {
+  background-color: #9ecbff;
+  cursor: not-allowed;
+}
+
+.link-back {
+  display: block;
+  margin-top: 15px;
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link-back:hover {
+  color: #0056d2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

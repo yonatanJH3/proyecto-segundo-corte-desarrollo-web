@@ -1,50 +1,92 @@
 <div class="login-container">
-
-  <div class="login-form-wrapper">
-    <div class="logo">
-      <img src="assets/logo2.png" alt="Logo de Academic Flow">
-    </div>
-
-    <div class="divider">
-      <span>OR LOGIN WITH EMAIL</span>
-    </div>
-
-    <form class="login-form">
-
-      <mat-form-field appearance="outline" class="full-width-input">
-        <mat-icon matPrefix>email</mat-icon> <!-- Icono de email -->
-        <mat-label>Email Address</mat-label>
-        <input matInput placeholder="Email Address">
-      </mat-form-field>
-
-      <!-- CAMPO PASSWORD con Icono -->
-      <mat-form-field appearance="outline" class="full-width-input">
-        <mat-icon matPrefix>lock</mat-icon> <!-- Icono de candado -->
-        <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Password">
-      </mat-form-field>
-
-      <div class="login-options">
-        <mat-checkbox class="checkbox-login" color="primary">Keep me logged in</mat-checkbox>
-        <a href="#" class="forgot-password">Forgot your password?</a>
+  <div class="login-card">
+    <div class="login-form-section">
+      <div class="logo-container" style="justify-items: center;">
+        <img src="assets/logo2.png" alt="Academika Logo" class="logo" />
       </div>
 
-      <button mat-flat-button color="primary" class="login-btn full-width-input">
-        Log In
-      </button>
-    </form>
-  </div>
+      <h2 class="login-title">OR LOGIN WITH EMAIL</h2>
 
-  <div class="login-image-wrapper">
-    <div class="academy-promo">
-      <div class="academy-text">
-        <h2>Domina tu Trayectoria Académica</h2>
-        <p>Deja atrás el caos de los apuntes dispersos. Ofrecemos el software integral que necesitas para mantener tu gestión académica organizada y en constante crecimiento.</p>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              [(ngModel)]="username"
+              placeholder="john_doe"
+              required
+              text
+              #emailInput="ngModel" />
+          </div>
+          <div class="error-message"
+            *ngIf="emailInput.invalid && emailInput.touched">
+            Please enter a valid email address
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="••••••"
+              required
+              minlength="6"
+              #passwordInput="ngModel" />
+          </div>
+          <div class="error-message"
+            *ngIf="passwordInput.invalid && passwordInput.touched">
+            Password must be at least 6 characters
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="keepLoggedIn"
+              name="keepLoggedIn" />
+            <span>Keep me logged in</span>
+          </label>
+          <button type="button" class="forgot-password"
+            (click)="onResetPassword()">
+            Forgot your password?
+          </button>
+        </div>
+
+        <div class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <button type="submit" class="login-button"
+          [disabled]="loginForm.invalid || loading">
+          <span *ngIf="!loading">Log In</span>
+          <span *ngIf="loading">Loading...</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icons">
+          <span class="hero-icon">📖</span>
+          <span class="hero-icon">🐋</span>
+          <span class="hero-icon">📚</span>
+        </div>
+        <h1 class="hero-title">Domina tu Trayectoria Académica</h1>
+        <p class="hero-description">
+          Deja atrás el caos de los apuntes dispersos. Ofrecemos el
+          software integral que necesitas para mantener tu gestión
+          académica organizada y en constante crecimiento.
+        </p>
+        <button class="cta-button">START ACADEMY</button>
       </div>
-      <button mat-stroked-button color="basic" class="start-academy-btn" type="button">
-        START ACADEMY
-      </button>
     </div>
   </div>
-
 </div>
